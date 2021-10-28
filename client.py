@@ -12,9 +12,16 @@ from pygame.locals import (
 p1 = [POST_WIDTH/2, WINDOW_HEIGHT/2]
 p2 = [WINDOW_WIDTH-POST_WIDTH*1.5, WINDOW_HEIGHT/2]
 ball = BALL_POS
+scorel = 0
+scorer = 0
 
 pygame.init()
 screen = pygame.display.set_mode([WINDOW_WIDTH,WINDOW_HEIGHT])
+pygame.display.set_caption("Text in Pygame")
+
+font_color=(0,150,250)
+font_obj=pygame.font.Font("C:\Windows\Fonts\segoeprb.ttf",25)
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 connected = True
@@ -33,6 +40,8 @@ while(connected):
 
         p1 = [p1[0],float(stri[0])]
         ball = [float(stri[1]),float(stri[2])]
+        scorel = int(stri[3])
+        scorer = int(stri[4])
 
         print(message)
     
@@ -67,12 +76,15 @@ while(connected):
     print("p2 ")
     print(p2[1])
 
+    text_obj=font_obj.render(str(scorel) + "   |   " + str(scorer),True,font_color)
+
     # Draw a solid blue circle in the center
     pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], POST_WIDTH, POST_HEIGHT))
     pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], POST_WIDTH, POST_HEIGHT))
     pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
 
     # Flip the display
+    screen.blit(text_obj,(WINDOW_WIDTH/2-50,30))
     pygame.display.flip()
 
 s.close()

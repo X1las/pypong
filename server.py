@@ -1,5 +1,7 @@
 import socket
+import sys
 import pygame
+import sys
 from settings import *
 from random import randrange
 
@@ -16,6 +18,8 @@ p2 = [WINDOW_WIDTH-POST_WIDTH*1.5, WINDOW_HEIGHT/2]
 ball = BALL_POS
 directx = 0
 directy = 0
+scorel = 0
+scorer = 0
 
 while directx == 0:
     directx = randrange(-1,1)
@@ -23,7 +27,12 @@ while directy == 0:
     directy = randrange(-1,1)
 
 pygame.init()
+
 screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
+pygame.display.set_caption("Text in Pygame")
+
+font_color=(0,150,250)
+font_obj=pygame.font.Font("C:\Windows\Fonts\segoeprb.ttf",25)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((TCP_IP, TCP_PORT))
@@ -40,8 +49,7 @@ while running:
     if message != "":
 
         p2 = [p2[0],float(message)]
-        print(p2)
-        temp = str(p1[1]) + "," + str(ball[0]) + "," + str(ball[1])
+        temp = str(p1[1]) + "," + str(ball[0]) + "," + str(ball[1]) + "," + str(scorel) + "," + str(scorer)
         positions = bytes(temp, 'utf-8')
         conn.send(positions)
 
@@ -50,11 +58,9 @@ while running:
 
     if pressed_keys[K_DOWN]:
         p1[1] += SPEED
-        print("down!")
 
     if pressed_keys[K_UP]:
         p1[1] -= SPEED
-        print("up!")
 
     for event in pygame.event.get():
         # Did the user hit a key?
@@ -90,6 +96,11 @@ while running:
         directy *= -1
 
     if WINDOW_WIDTH + BALL_RAD*3 < ball[0] or ball[0] < 0 - BALL_RAD*3:
+        if ball[0] < 0:
+            scorer+=1
+        else:
+            scorel+=1
+        
         ball=[WINDOW_WIDTH/2,WINDOW_HEIGHT/2]
         directx = 0
         directy = 0
@@ -98,6 +109,7 @@ while running:
         while directy == 0:
             directy = randrange(-2,2)
 
+    text_obj=font_obj.render(str(scorel) + "   |   " + str(scorer),True,font_color)
 
     # Draw a solid blue circle in the center
     pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], POST_WIDTH, POST_HEIGHT))
@@ -105,6 +117,7 @@ while running:
     pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
 
     # Flip the display
+    screen.blit(text_obj,(WINDOW_WIDTH/2-50,30))
     pygame.display.flip()
 
 
