@@ -10,7 +10,7 @@ from pygame.locals import (
 )
 
 p1 = [0, WINDOW_HEIGHT/2]
-p2 = [WINDOW_WIDTH, WINDOW_HEIGHT/2]
+p2 = [WINDOW_WIDTH - 25, WINDOW_HEIGHT/2]
 ball = BALL_POS
 
 pygame.init()
@@ -64,6 +64,8 @@ while(connected):
 
     # Fill the background with white
     screen.fill((0, 0, 0))
+    print("p2 ")
+    print(p2[1])
 
     # Draw a solid blue circle in the center
     pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], 5, 20))
