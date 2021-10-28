@@ -1,6 +1,7 @@
 import socket
 import pygame
 from settings import *
+from random import randrange
 
 from pygame.locals import (
     K_UP,
@@ -13,6 +14,13 @@ from pygame.locals import (
 p1 = [POST_WIDTH/2, WINDOW_HEIGHT/2]
 p2 = [WINDOW_WIDTH-POST_WIDTH*1.5, WINDOW_HEIGHT/2]
 ball = BALL_POS
+directx = 0
+directy = 0
+
+while directx == 0:
+    directx = randrange(-1,1)
+while directy == 0:
+    directy = randrange(-1,1)
 
 pygame.init()
 screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
@@ -67,8 +75,31 @@ while running:
     # Fill the background with white
     screen.fill((0, 0, 0))
 
+    ball[0] +=directx
+    ball[1] -=directy
+
+    if ball[0] > p1[0] - POST_WIDTH/2 and ball[0] < p1[0] + POST_WIDTH*1.5:
+        if ball[1] > p1[1] - POST_HEIGHT/2 and ball[1] < p1[1] + POST_HEIGHT*1.5:
+            directx *= -1
+    
+    if ball[0] > p2[0] - POST_WIDTH/2 and ball[0] < p2[0] + POST_WIDTH*1.5:
+        if ball[1] > p2[1] - POST_HEIGHT/2 and ball[1] < p2[1] + POST_HEIGHT*1.5:
+            directx *= -1
+    
+    if WINDOW_HEIGHT < ball[1] or ball[1] < 0:
+        directy *= -1
+
+    if WINDOW_WIDTH + BALL_RAD*3 < ball[0] or ball[0] < 0 - BALL_RAD*3:
+        ball=[WINDOW_WIDTH/2,WINDOW_HEIGHT/2]
+        directx = 0
+        directy = 0
+        while directx == 0:
+            directx = randrange(-2,2)
+        while directy == 0:
+            directy = randrange(-2,2)
+
+
     # Draw a solid blue circle in the center
-    print(p2)
     pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], POST_WIDTH, POST_HEIGHT))
     pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], POST_WIDTH, POST_HEIGHT))
     pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
