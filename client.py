@@ -8,7 +8,10 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
 )
-p2 = [WINDOW_WIDTH,WINDOW_HEIGHT/2]
+
+p1 = [0, WINDOW_HEIGHT/2]
+p2 = [WINDOW_WIDTH, WINDOW_HEIGHT/2]
+ball = BALL_POS
 
 pygame.init()
 screen = pygame.display.set_mode([WINDOW_WIDTH,WINDOW_HEIGHT])
@@ -32,7 +35,13 @@ while(connected):
     position = bytes(temp, 'utf-8')
     s.send(position)
     data = s.recv(BUFFER_SIZE_C)
-    print("received data:", data)
+
+    message = data.decode('utf-8')
+    if message != "":
+        str = message.split(",")
+        p1 = [p1[0],float(str[0])]
+        ball = [float(str[1]),float(str[2])]
+        print(message)
 
     # Did the user click the window close button?
     for event in pygame.event.get():
@@ -63,7 +72,9 @@ while(connected):
     screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (p2[0], p2[1]), 75)
+    pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], 5, 20))
+    pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], 5, 20))
+    pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
 
     # Flip the display
     pygame.display.flip()

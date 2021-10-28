@@ -31,9 +31,11 @@ while running:
 
     if message != "":
 
-        p2 = float(message)
+        p2 = [p2[0],float(message)]
         print(p2)
-        conn.send(data)
+        temp = str(p1[1]) + "," + str(ball[0]) + "," + str(ball[1])
+        positions = bytes(temp, 'utf-8')
+        conn.send(positions)
 
     # Did the user click the window close button?
     pressed_keys = pygame.key.get_pressed()
@@ -66,7 +68,9 @@ while running:
     screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+    pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], 5, 20))
+    pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], 5, 20))
+    pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
 
     # Flip the display
     pygame.display.flip()
