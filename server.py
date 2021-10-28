@@ -2,6 +2,16 @@ import socket
 import pygame
 from settings import *
 
+from pygame.locals import (
+    K_UP,
+    K_DOWN,
+    K_LEFT,
+    K_RIGHT,
+    K_ESCAPE,
+    KEYDOWN,
+    QUIT,
+)
+
 p1 = [0,WINDOW_HEIGHT/2 * -1]
 p2 = [WINDOW_WIDTH,WINDOW_HEIGHT/2 * -1]
 ball = BALL_POS
@@ -29,11 +39,21 @@ while running:
 
     # Did the user click the window close button?
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+        # Did the user hit a key?
+        if event.type == KEYDOWN:
+            # Was it the Escape key? If so, stop the loop.
+            if event.key == K_DOWN:
+                p1[1] -= 1
+            if event.key == K_UP:
+                p1[1] += 1
+    
+    if p1[1] > 0:
+        p1[1] = 0
+    if p1[1] < -1*WINDOW_HEIGHT:
+        p1[1] = -1*WINDOW_HEIGHT
 
     # Fill the background with white
-    screen.fill((255, 255, 255))
+    screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
     pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
