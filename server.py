@@ -41,11 +41,11 @@ while running:
     pressed_keys = pygame.key.get_pressed()
 
     if pressed_keys[K_DOWN]:
-        p1[1] -= 1
+        p1[1] += 1
         print("down!")
 
     if pressed_keys[K_UP]:
-        p1[1] += 1
+        p1[1] -= 1
         print("up!")
 
     for event in pygame.event.get():

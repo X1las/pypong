@@ -20,48 +20,42 @@ s.connect((TCP_IP, TCP_PORT))
 connected = True
 
 while(connected):
-    
-    pressed_keys = pygame.key.get_pressed()
-
-    if pressed_keys[K_DOWN]:
-        p2[1] -= 2
-        print("down!")
-
-    if pressed_keys[K_UP]:
-        p2[1] += 2
-        print("up!")
 
     temp = str(p2[1])
     position = bytes(temp, 'utf-8')
     s.send(position)
+    
     data = s.recv(BUFFER_SIZE_C)
-
     message = data.decode('utf-8')
+
     if message != "":
         str = message.split(",")
+
         p1 = [p1[0],float(str[0])]
         ball = [float(str[1]),float(str[2])]
+
         print(message)
+    
+    pressed_keys = pygame.key.get_pressed()
+
+    if pressed_keys[K_DOWN]:
+        p2[1] += 2
+        print("down!")
+
+    if pressed_keys[K_UP]:
+        p2[1] -= 2
+        print("up!")
 
     # Did the user click the window close button?
     for event in pygame.event.get():
         # Did the user hit a key?
         if event.type == KEYDOWN:
-            # Was it the Escape key? If so, stop the loop.
-            if event.key == K_DOWN:
-                p2[1] -= 5
-                print("up!")
-
-            if event.key == K_UP:
-                p2[1] += 5
-                print("down!")
 
             if event.key == K_ESCAPE:
                 running = False
 
         elif event.type == QUIT:
-            running = False
-            
+            running = False   
     
     if p2[1] < 0:
         p2[1] = 0
