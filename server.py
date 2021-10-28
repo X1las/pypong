@@ -10,8 +10,8 @@ from pygame.locals import (
     KEYDOWN,
 )
 
-p1 = [0, WINDOW_HEIGHT/2]
-p2 = [WINDOW_WIDTH-5, WINDOW_HEIGHT/2]
+p1 = [POST_WIDTH/2, WINDOW_HEIGHT/2]
+p2 = [WINDOW_WIDTH-POST_WIDTH*1.5, WINDOW_HEIGHT/2]
 ball = BALL_POS
 
 pygame.init()
@@ -41,11 +41,11 @@ while running:
     pressed_keys = pygame.key.get_pressed()
 
     if pressed_keys[K_DOWN]:
-        p1[1] += 1
+        p1[1] += SPEED
         print("down!")
 
     if pressed_keys[K_UP]:
-        p1[1] -= 1
+        p1[1] -= SPEED
         print("up!")
 
     for event in pygame.event.get():
@@ -61,16 +61,16 @@ while running:
 
     if p1[1] < 0:
         p1[1] = 0
-    if p1[1] > WINDOW_HEIGHT:
-        p1[1] = WINDOW_HEIGHT
+    if p1[1] > WINDOW_HEIGHT-POST_HEIGHT:
+        p1[1] = WINDOW_HEIGHT-POST_HEIGHT
 
     # Fill the background with white
     screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
     print(p2)
-    pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], 5, 20))
-    pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], 5, 20))
+    pygame.draw.rect(screen, (255, 0, 0), (p1[0], p1[1], POST_WIDTH, POST_HEIGHT))
+    pygame.draw.rect(screen, (255, 0, 0), (p2[0], p2[1], POST_WIDTH, POST_HEIGHT))
     pygame.draw.circle(screen, (200,30,0), (ball[0],ball[1]),5)
 
     # Flip the display
