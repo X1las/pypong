@@ -5,11 +5,9 @@ from settings import *
 from pygame.locals import (
     K_UP,
     K_DOWN,
-    K_LEFT,
-    K_RIGHT,
     K_ESCAPE,
-    KEYDOWN,
     QUIT,
+    KEYDOWN,
 )
 
 p1 = [0,WINDOW_HEIGHT/2 * -1]
@@ -44,8 +42,18 @@ while running:
             # Was it the Escape key? If so, stop the loop.
             if event.key == K_DOWN:
                 p1[1] -= 1
+                print("up!")
+
             if event.key == K_UP:
                 p1[1] += 1
+                print("down!")
+
+            if event.key == K_ESCAPE:
+                running = False
+
+        elif event.type == QUIT:
+            running = False
+            
     
     if p1[1] > 0:
         p1[1] = 0
