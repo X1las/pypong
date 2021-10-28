@@ -4,8 +4,6 @@ import pygame
 from pygame.locals import (
     K_UP,
     K_DOWN,
-    K_LEFT,
-    K_RIGHT,
     K_ESCAPE,
     KEYDOWN,
     QUIT,
@@ -32,11 +30,11 @@ while(connected):
         if event.type == KEYDOWN:
             # Was it the Escape key? If so, stop the loop.
             if event.key == K_DOWN:
-                p1[1] -= 1
+                p2[1] -= 10
                 print("up!")
 
             if event.key == K_UP:
-                p1[1] += 1
+                p2[1] += 10
                 print("down!")
 
             if event.key == K_ESCAPE:
@@ -46,16 +44,16 @@ while(connected):
             running = False
             
     
-    if p1[1] > 0:
-        p1[1] = 0
-    if p1[1] < -1*WINDOW_HEIGHT:
-        p1[1] = -1*WINDOW_HEIGHT
+    if p2[1] > 0:
+        p2[1] = 0
+    if p2[1] < -1*WINDOW_HEIGHT:
+        p2[1] = -1*WINDOW_HEIGHT
 
     # Fill the background with white
     screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+    pygame.draw.circle(screen, (0, 0, 255), (250, p2[1]), 75)
 
     # Flip the display
     pygame.display.flip()
