@@ -21,11 +21,11 @@ while(connected):
     pressed_keys = pygame.key.get_pressed()
 
     if pressed_keys[K_DOWN]:
-        p2[1] -= 1
+        p2[1] -= 2
         print("down!")
 
     if pressed_keys[K_UP]:
-        p2[1] += 1
+        p2[1] += 2
         print("up!")
 
     temp = str(p2[1])
@@ -40,11 +40,11 @@ while(connected):
         if event.type == KEYDOWN:
             # Was it the Escape key? If so, stop the loop.
             if event.key == K_DOWN:
-                p2[1] -= 10
+                p2[1] -= 5
                 print("up!")
 
             if event.key == K_UP:
-                p2[1] += 10
+                p2[1] += 5
                 print("down!")
 
             if event.key == K_ESCAPE:
@@ -63,7 +63,7 @@ while(connected):
     screen.fill((0, 0, 0))
 
     # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, p2[1]), 75)
+    pygame.draw.circle(screen, (0, 0, 255), (p2[0], p2[1]), 75)
 
     # Flip the display
     pygame.display.flip()
