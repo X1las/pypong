@@ -10,8 +10,8 @@ from pygame.locals import (
     KEYDOWN,
 )
 
-p1 = [0, WINDOW_HEIGHT/2 * -1]
-p2 = [WINDOW_WIDTH, WINDOW_HEIGHT/2 * -1]
+p1 = [0, WINDOW_HEIGHT/2]
+p2 = [WINDOW_WIDTH, WINDOW_HEIGHT/2]
 ball = BALL_POS
 
 pygame.init()
@@ -57,10 +57,10 @@ while running:
         elif event.type == QUIT:
             running = False
 
-    if p1[1] > 0:
+    if p1[1] < 0:
         p1[1] = 0
-    if p1[1] < -1*WINDOW_HEIGHT:
-        p1[1] = -1*WINDOW_HEIGHT
+    if p1[1] > WINDOW_HEIGHT:
+        p1[1] = WINDOW_HEIGHT
 
     # Fill the background with white
     screen.fill((0, 0, 0))
