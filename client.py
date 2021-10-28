@@ -10,3 +10,4 @@ data = s.recv(BUFFER_SIZE_C)
 s.close()
 
 print("received data:", data)
+

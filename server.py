@@ -1,5 +1,5 @@
 import socket
-import pygame
+#import pygame
 from settings import *
 
 #pygame.init()
