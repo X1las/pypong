@@ -8,7 +8,7 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
 )
-p2 = [WINDOW_WIDTH,WINDOW_HEIGHT/2 * -1]
+p2 = [WINDOW_WIDTH,WINDOW_HEIGHT/2]
 
 pygame.init()
 screen = pygame.display.set_mode([WINDOW_WIDTH,WINDOW_HEIGHT])
@@ -18,6 +18,16 @@ connected = True
 
 while(connected):
     
+    pressed_keys = pygame.key.get_pressed()
+
+    if pressed_keys[K_DOWN]:
+        p2[1] -= 1
+        print("down!")
+
+    if pressed_keys[K_UP]:
+        p2[1] += 1
+        print("up!")
+
     temp = str(p2[1])
     position = bytes(temp, 'utf-8')
     s.send(position)
@@ -44,10 +54,10 @@ while(connected):
             running = False
             
     
-    if p2[1] > 0:
+    if p2[1] < 0:
         p2[1] = 0
-    if p2[1] < -1*WINDOW_HEIGHT:
-        p2[1] = -1*WINDOW_HEIGHT
+    if p2[1] > 1*WINDOW_HEIGHT:
+        p2[1] = 1*WINDOW_HEIGHT
 
     # Fill the background with white
     screen.fill((0, 0, 0))
