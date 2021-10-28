@@ -29,10 +29,10 @@ while(connected):
     message = data.decode('utf-8')
 
     if message != "":
-        str = message.split(",")
+        stri = message.split(",")
 
-        p1 = [p1[0],float(str[0])]
-        ball = [float(str[1]),float(str[2])]
+        p1 = [p1[0],float(stri[0])]
+        ball = [float(stri[1]),float(stri[2])]
 
         print(message)
     
