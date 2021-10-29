@@ -28,7 +28,7 @@ while directy == 0:
 pygame.init()
 
 screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
-pygame.display.set_caption("Text in Pygame")
+pygame.display.set_caption("TCPython Pong")
 
 font_color=(0,150,250)
 font_obj=pygame.font.Font("C:\Windows\Fonts\segoeprb.ttf",25)
