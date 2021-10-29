@@ -1,5 +1,4 @@
 import socket
-import sys
 import pygame
 import sys
 from settings import *
