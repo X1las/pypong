@@ -73,8 +73,6 @@ while(connected):
 
     # Fill the background with white
     screen.fill((0, 0, 0))
-    print("p2 ")
-    print(p2[1])
 
     text_obj=font_obj.render(str(scorel) + "   |   " + str(scorer),True,font_color)
 

@@ -14,24 +14,6 @@ from pygame.locals import (
 
 p1 = [POST_WIDTH/2, WINDOW_HEIGHT/2]
 p2 = [WINDOW_WIDTH-POST_WIDTH*1.5, WINDOW_HEIGHT/2]
-ball = BALL_POS
-directx = 0
-directy = 0
-scorel = 0
-scorer = 0
-
-while directx == 0:
-    directx = randrange(-1,1)
-while directy == 0:
-    directy = randrange(-1,1)
-
-pygame.init()
-
-screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
-pygame.display.set_caption("TCPython Pong")
-
-font_color=(0,150,250)
-font_obj=pygame.font.Font("C:\Windows\Fonts\segoeprb.ttf",25)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((TCP_IP, TCP_PORT))
