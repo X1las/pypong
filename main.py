@@ -40,16 +40,12 @@ class Game:
         pygame.display.flip()
         
     
-
     # Running game loop function
     def run(self):
         self.running = True
         while self.running:
             for event in pygame.event.get():
-                # Did the user hit a key?
                 if event.type == KEYDOWN:
-
-                    # Was it the Escape key? If so, stop the loop.
                     if event.key == K_ESCAPE:
                         self.running = False
                 elif event.type == QUIT:
