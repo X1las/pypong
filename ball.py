@@ -21,3 +21,4 @@ class Ball:
             self.direction[0] = randrange(-1,1)
         while self.direction[1] == 0:
             self.direction[1] = randrange(-1,1)
+
