@@ -52,7 +52,7 @@ class Game:
                     self.running = False
             self.draw()
 
-        quit()
+        self.quit()
     
 
     # Quit function
